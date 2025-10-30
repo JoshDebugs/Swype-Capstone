@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Swype Landing</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    * {
+      box-sizing: border-box; 
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      background-color: rgb(20, 20, 20);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #fff;
+    }
+
+    header {
+      display: flex;
+      align-items: center;          
+      justify-content: space-between;
+      padding: 30px 10%;
+      gap: 24px;                     
+    }
+
+    .logo {
+      width: 160px;          
+      max-height: 52px;      
+      object-fit: contain;   
+      cursor: pointer;
+      transition: transform 180ms ease;
+    }
+
+    .logo:hover {
+      transform: scale(0.98);
+    }
+
+    nav ul.nav_links {
+      display: flex;            
+      gap: 32px;                
+      align-items: center;
+      list-style: none;
+    }
+
+    nav ul.nav_links a {
+      color: #efefef;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 500;
+      padding: 6px 4px;
+      transition: color 150ms ease, transform 150ms ease;
+    }
+
+    nav ul.nav_links a:hover {
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .btn {
+      color: white;
+      background-color: rgb(41, 41, 41); 
+      border: 1px solid #3d3d3d;
+      padding: 10px 22px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 220ms cubic-bezier(.2,.9,.2,1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn:focus {
+      outline: 3px solid rgba(255,255,255,0.08);
+      outline-offset: 2px;
+    }
+
+    .btn-early {
+      background: rgb(41, 41, 41);
+      border: 1px solid #3d3d3d;
+      color: #fff;
+    }
+
+    .btn-early:hover {
+      background: white; 
+      color: rgb(20,20,20);
+      transition: all 0.50s ease;
+    }
+
+    .btn-sign {
+      background: transparent;           
+      border: none;
+      color: #fff;
+    }
+
+    .btn-sign:hover {
+      background: #ffffff;              
+      color: rgb(20,20,20);              
+      border-color: #ffffff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+      transition: all 0.50s ease;
+    }
+
+    .cta-wrap {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .hero {
+      position: relative;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 155px;
+    }
+
+    .tagline1 {
+      color: white;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .tagline2 {
+      color: white;
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .tagline3 {
+      color: white;
+      font-size: 19px;
+      margin-bottom: 40px;
+    }
+
+    .hero-btn {
+      color: white;
+      background-color: rgb(41, 41, 41);
+      font-size: 18px;
+      border: 1px solid #3d3d3d;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.50s ease;
+      width: fit-content;
+    }
+
+    .hero-btn:hover {
+      background-color: white;
+      color: rgb(20, 20, 20);
+    }
+    
+    .head-tagline1 {
+      text-align: center;
+      height: 22vh;
+      color: white;
+      font-size: 40px;
+      font-weight: 550;
+      line-height: 8.5;
+      margin-bottom: 20px
+    }
+    
+    .head-tagline2 {
+      height: 30vh;
+      line-height: 140vh;
+      text-align: center;
+      font-size: 35px;
+      font-weight: 550;
+    }
+    
+    .head-tagline3 {
+      height: 30vh;
+      line-height: 140vh;
+      text-align: center;
+      font-size: 35px;
+      font-weight: 550;
+    }
+
+    .paraoftagline1 {
+      text-align: center;
+      color: white;
+      font-size: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .paraoftagline2 {
+      text-align: center;
+      color: white;
+      font-size: 20px;
+      margin-bottom: 40px;
+      line-height: 39;
+    }
+    .paraoftagline3 {
+      text-align: center;
+      color: white;
+      font-size: 20px;
+      margin-bottom: 40px;
+      line-height: 39;
+    }
+
+    .secbuttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <img class="logo" src="Screenshot 2025-10-28 at 6.57.57 PM.png" >
+
+    <nav>
+      <ul class="nav_links">
+        <li><a href="Products.html">Products</a></li>
+        <li><a href="Services.html">Services</a></li>
+        <li><a href="Research.html">Research</a></li>
+      </ul>
+    </nav>
+
+    <div class="cta-wrap">
+      <a href="#" aria-label="Get Early Access">
+        <button class="btn btn-early">Get Early Access</button>
+      </a>
+      <a href="#" aria-label="Sign in">
+        <button class="btn btn-sign">Sign in</button>
+      </a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <p class="tagline1">Split bills. Stay social. Swype it together.</p>
+    <p class="tagline2">One app to make every <br>group payment simple.</p>
+    <p class="tagline3">Your Platform for Social Payments.</p>
+    <button class="hero-btn">Get Early Access</button>
+  </section>
+
+  <section>
+    <p class ="head-tagline1">Effortless Payments for Every Group You’re In</p>
+    <p class ="paraoftagline1">Engineered to streamline how friends, teams, and families manage collective expenses, <br>optimize transactions, and maintain financial harmony.</p>
+  </section>
+
+<section>
+    <p class="head-tagline2">Your Group Payment Journey Starts in Seconds</p>
+    <p class="paraoftagline2">No long forms. No setup stress. Just tap, join, and go.</p>
+</section>
+
+<section>
+    <p class="head-tagline3">Real Stories, Real Connections: See How Groups Simplify Payments</p>
+    <p class="paraoftagline3">Discover how teams, friends, and families are transforming the way they manage shared expenses.</p>
+</section>
+
+<section class="secbuttons">
+    <button class="btn btn-early">Case Studies</button>
+    <button class="btn btn-sign">Create Account</button>
+</section>
+</body>
+</html>
