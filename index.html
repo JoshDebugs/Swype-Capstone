@@ -4,673 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Swype - Social Payment App</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <style>
-      * {
-        box-sizing: border-box;
-        padding: 0;
-        margin: 0;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        background-color: #0a0a0a;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-        color: #fff;
-        overflow-x: hidden;
-      }
-
-      header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 28px 8%;
-        position: relative;
-        z-index: 100;
-      }
-
-      .logo {
-        font-size: 34px;
-        font-weight: 600;
-        letter-spacing: -0.5px;
-        color: #fff;
-        transition: transform 180ms ease;
-      }
-
-      .logo:hover {
-      transform: scale(0.98);
-    }
-
-      nav ul {
-        display: flex;
-        gap: 48px;
-        list-style: none;
-        align-items: center;
-      }
-
-      nav ul a {
-        color: #d0d0d0;
-        text-decoration: none;
-        font-size: 15px;
-        font-weight: 500;
-        transition: color 0.2s ease;
-      }
-
-      nav ul a:hover {
-        color: #fff;
-      }
-
-      .header-btns {
-        display: flex;
-        gap: 12px;
-      }
-
-      .btn {
-        padding: 11px 24px;
-        border-radius: 8px;
-        font-size: 15px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: none;
-        text-decoration: none;
-        display: inline-block;
-      }
-
-      .btn-signin {
-        background: transparent;
-        color: #fff;
-        border: 1px solid #333;
-      }
-
-      .btn-signin:hover {
-        background: #1a1a1a;
-      }
-
-      .btn-demo {
-        background: #fff;
-        color: #0a0a0a;
-      }
-
-      .btn-demo:hover {
-        background: #e0e0e0;
-        transform: translateY(-1px);
-      }
-
-      .hero {
-        padding: 120px 8% 80px;
-        position: relative;
-      }
-
-      .hero-content {
-        max-width: 640px;
-      }
-
-      .hero-tag {
-        font-size: 16px;
-        color: #999;
-        margin-bottom: 16px;
-        letter-spacing: 0.5px;
-      }
-
-      .hero-title {
-        font-size: 68px;
-        font-weight: 700;
-        line-height: 1.1;
-        margin-bottom: 24px;
-        letter-spacing: -2px;
-      }
-
-      .hero-subtitle {
-        font-size: 22px;
-        color: #999;
-        margin-bottom: 40px;
-        line-height: 1.4;
-      }
-
-      .hero-cta {
-        padding: 16px 36px;
-        background: #2a2a2a;
-        color: #fff;
-        border: 1px solid #3d3d3d;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .hero-cta:hover {
-        background: #fff;
-        color: #0a0a0a;
-      }
-
-      .cards-display {
-        position: absolute;
-        right: 8%;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 520px;
-        height: 600px;
-      }
-
-      .card {
-        position: absolute;
-        width: 340px;
-        height: 210px;
-        border-radius: 20px;
-        padding: 24px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-        transition: transform 0.3s ease;
-      }
-
-      .card:hover {
-        transform: translateY(-8px) !important;
-      }
-
-      .card-1 {
-        background: linear-gradient(135deg, #667eea 0%, #f093fb 50%, #ff6b6b 100%);
-        top: 0;
-        right: 0;
-        transform: rotate(8deg);
-      }
-
-      .card-2 {
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #43e97b 100%);
-        top: 140px;
-        right: 80px;
-        transform: rotate(-5deg);
-      }
-
-      .card-3 {
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 50%, #ff6b6b 100%);
-        top: 280px;
-        right: 40px;
-        transform: rotate(4deg);
-      }
-
-      .card-4 {
-        background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 50%, #feca57 100%);
-        top: 390px;
-        right: 140px;
-        transform: rotate(-8deg);
-      }
-
-      .card-brand {
-        font-size: 18px;
-        font-weight: 700;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      }
-
-      .card-number {
-        font-size: 20px;
-        letter-spacing: 2px;
-        margin-top: 20px;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      }
-
-      .card-info {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-      }
-
-      .card-holder {
-        font-size: 13px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-
-      .card-expiry {
-        font-size: 13px;
-      }
-
-      .card-icon {
-        position: absolute;
-        top: 24px;
-        right: 24px;
-        width: 40px;
-        height: 40px;
-        background: rgba(255,255,255,0.3);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-      }
-
-      .section {
-        padding: 120px 8%;
-        text-align: center;
-      }
-
-      .section-title {
-        font-size: 48px;
-        font-weight: 700;
-        margin-bottom: 30px;
-        letter-spacing: -1px;
-      }
-
-      .section-subtitle {
-        font-size: 20px;
-        color: #999;
-        max-width: 800px;
-        margin: 0 auto 80px;
-        line-height: 1.6;
-      }
-
-      .features-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 24px;
-        margin-top: 60px;
-      }
-
-      .feature-card {
-        background: #161616;
-        border: 1px solid #282828;
-        border-radius: 16px;
-        padding: 32px;
-        text-align: left;
-        transition: all 0.3s ease;
-      }
-
-      .feature-card:hover {
-        background: #1a1a1a;
-        border-color: #3a3a3a;
-        transform: translateY(-4px);
-      }
-
-      .feature-icon1 {
-        width: 56px;
-        height: 56px;
-        background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
-        border-radius: 12px;
-        margin-bottom: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        background-image: url(image.png);
-        background-repeat: no-repeat;
-        background-size: 150%;
-      }
-
-       .feature-icon2 {
-        width: 56px;
-        height: 56px;
-        background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
-        border-radius: 12px;
-        margin-bottom: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-      }
-
-       .feature-icon3 {
-        width: 56px;
-        height: 56px;
-        background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
-        border-radius: 12px;
-        margin-bottom: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-      }
-
-       .feature-icon4 {
-        width: 56px;
-        height: 56px;
-        background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
-        border-radius: 12px;
-        margin-bottom: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-      }
-
-      .feature-card:nth-child(2) .feature-icon {
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      }
-
-      .feature-card:nth-child(3) .feature-icon {
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-      }
-
-      .feature-card:nth-child(4) .feature-icon {
-        background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
-      }
-
-      .feature-title {
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: 12px;
-      }
-
-      .feature-desc {
-        font-size: 15px;
-        color: #999;
-        line-height: 1.6;
-        margin-bottom: 16px;
-      }
-
-      .feature-link {
-        color: #667eea;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 600;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-      }
-
-      .steps-section {
-        background: #0f0f0f;
-        padding: 120px 8%;
-      }
-
-      .steps-grid {
-        display: grid;
-        gap: 80px;
-        margin-top: 80px;
-      }
-
-      .step {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 80px;
-        align-items: center;
-      }
-
-      .step-number {
-        font-size: 120px;
-        font-weight: 800;
-        color: #1a1a1a;
-        line-height: 1;
-        margin-bottom: 20px;
-      }
-
-      .step-title {
-        font-size: 36px;
-        font-weight: 700;
-        margin-bottom: 24px;
-      }
-
-      .step-list {
-        list-style: none;
-      }
-
-      .step-list li {
-        padding: 12px 0 12px 32px;
-        font-size: 16px;
-        color: #999;
-        position: relative;
-        line-height: 1.6;
-      }
-
-      .step-list li:before {
-        content: '✓';
-        position: absolute;
-        left: 0;
-        color: #667eea;
-        font-weight: 700;
-      }
-
-      .step-image1 {
-        background: #161616;
-        border: 1px solid #282828;
-        border-radius: 20px;
-        height: 400px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        position: relative;
-
-      }
-
-      .step-image2 {
-        background: #161616;
-        border: 1px solid #282828;
-        border-radius: 20px;
-        height: 400px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        position: relative;
-        background-image: url(download.jpeg);
-      }
-
-      .step-image3 {
-        background: #161616;
-        border: 1px solid #282828;
-        border-radius: 20px;
-        height: 400px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        position: relative;
-        background-image: url(download.jpeg);
-      }
-
-      .step-image::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
-        border-radius: 20px;
-      }
-
-      .testimonials {
-        padding: 120px 8%;
-      }
-
-      .testimonials-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 24px;
-        margin-top: 60px;
-      }
-
-      .testimonial-card {
-        background: #161616;
-        border: 1px solid #282828;
-        border-radius: 16px;
-        padding: 32px;
-        transition: all 0.3s ease;
-      }
-
-      .testimonial-card:hover {
-        border-color: #3a3a3a;
-        transform: translateY(-4px);
-      }
-
-      .testimonial-logo {
-        font-size: 24px;
-        font-weight: 700;
-        margin-bottom: 80px;
-      }
-
-      .testimonial-company {
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 12px;
-      }
-
-      .testimonial-text {
-        font-size: 14px;
-        color: #999;
-        line-height: 1.6;
-        margin-bottom: 20px;
-      }
-
-      .testimonial-link {
-        color: #667eea;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 600;
-      }
-
-      .cta-section {
-        padding: 120px 8%;
-        text-align: center;
-      }
-
-      .cta-box {
-        background: linear-gradient(135deg, #667eea 0%, #f093fb 50%, #ff6b6b 100%);
-        border-radius: 24px;
-        padding: 80px;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .cta-box::before {
-        content: '';
-        position: absolute;
-        right: -100px;
-        top: -100px;
-        width: 400px;
-        height: 400px;
-        background: url('data:image/svg+xml,<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="cards" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><rect x="10" y="10" width="60" height="40" rx="5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="400" height="400" fill="url(%23cards)"/></svg>');
-        opacity: 0.3;
-      }
-
-      .cta-title {
-        font-size: 42px;
-        font-weight: 700;
-        margin-bottom: 16px;
-        position: relative;
-      }
-
-      .cta-text {
-        font-size: 18px;
-        margin-bottom: 40px;
-        opacity: 0.95;
-        position: relative;
-      }
-
-      .cta-buttons {
-        display: flex;
-        gap: 16px;
-        justify-content: center;
-        position: relative;
-      }
-
-      .cta-btn {
-        padding: 16px 36px;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: none;
-      }
-
-      .cta-btn-primary {
-        background: #fff;
-        color: #0a0a0a;
-      }
-
-      .cta-btn-primary:hover {
-        background: #e0e0e0;
-        transform: translateY(-2px);
-      }
-
-      .cta-btn-secondary {
-        background: rgba(255,255,255,0.2);
-        color: #fff;
-        border: 1px solid rgba(255,255,255,0.3);
-      }
-
-      .cta-btn-secondary:hover {
-        background: rgba(255,255,255,0.3);
-      }
-
-      footer {
-        background: #0f0f0f;
-        border-top: 1px solid #1a1a1a;
-        padding: 80px 8% 40px;
-      }
-
-      .footer-grid {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 40px;
-        margin-bottom: 60px;
-      }
-
-      .footer-column h4 {
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 20px;
-        color: #666;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-
-      .footer-column ul {
-        list-style: none;
-      }
-
-      .footer-column ul li {
-        margin-bottom: 12px;
-      }
-
-      .footer-column ul li a {
-        color: #999;
-        text-decoration: none;
-        font-size: 14px;
-        transition: color 0.2s ease;
-      }
-
-      .footer-column ul li a:hover {
-        color: #fff;
-      }
-
-      .footer-bottom {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 40px;
-        border-top: 1px solid #1a1a1a;
-        color: #666;
-        font-size: 14px;
-      }
-
-      @media (max-width: 1200px) {
-        .cards-display {
-          display: none;
-        }
-        .hero-content {
-          max-width: 100%;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .features-grid,
-        .testimonials-grid {
-          grid-template-columns: 1fr;
-        }
-        .step {
-          grid-template-columns: 1fr;
-        }
-        .footer-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
+      
     </style>
 </head>
 <body>
@@ -678,23 +14,23 @@
         <div class="logo">Swype</div>
         <nav>
             <ul>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#resources">Resources</a></li>
-                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="Products.html">Products</a></li>
+                <li><a href="Research.html">Research</a></li>
+                <li><a href="Services.html">Services</a></li>
             </ul>
         </nav>
         <div class="header-btns">
-            <a href="#signin" class="btn btn-signin">Sign in</a>
-            <a href="#demo" class="btn btn-demo">Book a Demo</a>
+            <a href="signin.html" class="btn btn-signin">Sign in</a>
+            <a href="getearlyaccess.html" class="btn btn-demo">Get Early Access</a>
         </div>
     </header>
 
     <section class="hero">
         <div class="hero-content">
             <p class="hero-tag">Split bills. Stay social. Swype it together.</p>
-            <h1 class="hero-title">One app to make <br>every group payment simple.</h1>
+            <h1 class="hero-title">One app to make <br>every group payment <div class="simple">simple.</div></h1>
             <p class="hero-subtitle">Your Platform for Social Payments.</p>
-            <button class="hero-cta">Get Early Access</button>
+            <a href="getearlyaccess.html"><button class="hero-cta">Get Early Access</button></a>
         </div>
         <div class="cards-display">
             <div class="card card-1">
@@ -745,40 +81,40 @@
     </section>
 
     <section class="section">
-        <h2 class="section-title">Effortless Payments for Every Group You’re In</h2>
+        <h2 class="section-title">Effortless Payments for <span class="simple1">Every</span><span class="simple1"> Group </span>You're in.</h2>
         <p class="section-subtitle">Engineered to streamline how friends, teams, and families manage collective expenses, <br>optimize transactions, and maintain financial harmony.</p>
         
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon1"></div>
+                <div class="feature-icon1">☀︎</div>
                 <h3 class="feature-title">Group Pools</h3>
                 <p class="feature-desc">Set up dedicated pools for any group, trips, roommates, or parties, so everyone can contribute transparently and all funds are tracked in one place.</p>
-                <a href="#" class="feature-link">Learn more →</a>
+                <a href="Products.html" class="feature-link">Learn more →</a>
             </div>
             <div class="feature-card">
-                <div class="feature-icon2">📊</div>
+                <div class="feature-icon2">÷</div>
                 <h3 class="feature-title">Smart Split Calculator</h3>
                 <p class="feature-desc">Quickly split any bill using equal, percentage, or custom rules. Avoid confusion and ensure everyone pays their fair share, every time.</p>
-                <a href="#" class="feature-link">Learn more →</a>
+                <a href="Products.html" class="feature-link">Learn more →</a>
             </div>
             <div class="feature-card">
-                <div class="feature-icon3">👤</div>
+                <div class="feature-icon3">𓌉◯𓇋</div>
                 <h3 class="feature-title">Activity Feed</h3>
                 <p class="feature-desc">See real-time updates on who paid, group progress towards goals, and celebrate milestone achievements with the group.</p>
-                <a href="#" class="feature-link">Learn more →</a>
+                <a href="Products.html" class="feature-link">Learn more →</a>
             </div>
             <div class="feature-card">
-                <div class="feature-icon4">📸</div>
+                <div class="feature-icon4">₹</div>
                 <h3 class="feature-title">Seamless UPI Payments</h3>
                 <p class="feature-desc">Instantly pay or request money right inside the app with integrated UPI – no switching between apps, no copy-paste hassle.</p>
-                <a href="#" class="feature-link">Learn more →</a>
+                <a href="Products.html" class="feature-link">Learn more →</a>
             </div>
         </div>
     </section>
 
     <section class="steps-section">
         <div style="text-align: center;">
-            <h2 class="section-title">Your Group Payment Journey Starts in Seconds</h2>
+            <h2 class="section-title">Your Group Payment Journey <span class="simple1">Starts in Seconds</span></h2>
             <p class="section-subtitle">No long forms. No setup stress. Just tap. join. and go.</p>
         </div>
 
@@ -794,13 +130,13 @@
                     </ul>
                 </div>
                 <div class="step-image1">
-                    <span style="font-size: 80px; opacity: 0.3;">📝</span>
+                    <span style="font-size: 80px; opacity: 0.3;"></span>
                 </div>
             </div>
 
             <div class="step">
                 <div class="step-image2">
-                    <span style="font-size: 80px; opacity: 0.3;">⚙️</span>
+                    <span style="font-size: 80px; opacity: 0.3;"></span>
                 </div>
                 <div>
                     <div class="step-number">02</div>
@@ -824,7 +160,7 @@
                     </ul>
                 </div>
                 <div class="step-image3">
-                    <span style="font-size: 80px; opacity: 0.3;">🚀</span>
+                    <span style="font-size: 80px; opacity: 0.3;"></span>
                 </div>
             </div>
         </div>
@@ -832,31 +168,31 @@
 
     <section class="testimonials">
         <div style="text-align: center;">
-            <h2 class="section-title">Real Stories, Real Connections:<br> See How Groups Simplify Payments</h2>
+            <h2 class="section-title"><span class="simple1">Real Stories, Real Connections:</span><br> See How Groups Simplify Payments</h2>
             <p class="section-subtitle">Discover how teams, friends, and families are transforming the way they manage shared expenses.</p>
         </div>
 
         <div class="testimonials-grid">
             <div class="testimonial-card">
-                <div class="testimonial-logo">🇮🇳 Swype</div>
+                <div class="testimonial-logo">Swype</div>
                 <h3 class="testimonial-company">Swype</h3>
                 <p class="testimonial-text">“The simplest way to split bills and manage group payments. Intuitive, seamless, and social!”</p>
                 <a href="#" class="testimonial-link">Read case study →</a>
             </div>
             <div class="testimonial-card">
-                <div class="testimonial-logo">🇨🇦 QuickSplit</div>
+                <div class="testimonial-logo">QuickSplit</div>
                 <h3 class="testimonial-company">QuickSplit</h3>
                 <p class="testimonial-text">“Our group no longer worries about awkward reminders. Splitting and settling is finally easy!”</p>
                 <a href="#" class="testimonial-link">Read case study →</a>
             </div>
             <div class="testimonial-card">
-                <div class="testimonial-logo">🇦🇺 Roomies</div>
+                <div class="testimonial-logo">Roomies</div>
                 <h3 class="testimonial-company">Roomies</h3>
                 <p class="testimonial-text">“Tracking rent and groceries with Roomies made sharing expenses transparent and fair.”</p>
                 <a href="#" class="testimonial-link">Read case study →</a>
             </div>
             <div class="testimonial-card">
-                <div class="testimonial-logo">🇺🇸 TRIPFUND</div>
+                <div class="testimonial-logo">TRIPFUND</div>
                 <h3 class="testimonial-company">TripFund</h3>
                 <p class="testimonial-text">“Group travel is hassle-free with TripFund. Contribute, track, and celebrate together!”</p>
                 <a href="#" class="testimonial-link">Read case study →</a>
@@ -869,8 +205,8 @@
             <h2 class="cta-title">Start your free trial</h2>
             <p class="cta-text">Expense management made easy.</p>
             <div class="cta-buttons">
-                <button class="cta-btn cta-btn-primary">Book a Demo</button>
-                <button class="cta-btn cta-btn-secondary">Login</button>
+                <a href="getearlyaccess.html"><button class="cta-btn cta-btn-primary">Get Early Access</button></a>
+                <a href="signin.html"><button class="cta-btn cta-btn-secondary">Sign In</button></a>
             </div>
         </div>
     </section>
@@ -950,4 +286,53 @@
         </div>
     </footer>
 </body>
-</html>
+</html>     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

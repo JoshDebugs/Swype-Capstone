@@ -3,9 +3,469 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign In - Finance Portal</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #000000;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .bg-card {
+        position: absolute;
+        width: 320px;
+        height: 200px;
+        border-radius: 18px;
+
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .bg-card-1 {
+        background: linear-gradient(135deg, #f12711, #f5af19);
+        top: 4%;
+        right: 20%;
+        animation-delay: 0s;
+        transform: rotate(-15deg);
+      }
+
+      .bg-card-2 {
+        background: linear-gradient(135deg, #FF416C, #FF4B2B);
+        top: 25%;
+        right: 10%;
+        animation-delay: -3s;
+        transform: rotate(-8deg);
+      }
+
+      .bg-card-3 {
+        background: linear-gradient(135deg, #8E2DE2, #4A00E0);
+        bottom: 8%;
+        left: 14%;
+        animation-delay: -6s;
+        transform: rotate(18deg);
+      }
+
+      .bg-card-4 {
+        background: linear-gradient(135deg, #000046, #1CB5E0);
+        bottom: 50%;
+        left: 8%;
+        animation-delay: -9s;
+        transform: rotate(12deg);
+      }
+
+      .bg-card-5 {
+        background: linear-gradient(135deg, #ff7e5f, #feb47b);
+        top: 15%;
+        left: 20%;
+        animation-delay: -12s;
+        transform: rotate(-20deg);
+      }
+
+      .bg-card-6 {
+        background: linear-gradient(135deg, #0cebeb, #20e3b2, #DBDBDB);
+        bottom: 10%;
+        right: 12%;
+        animation-delay: -15s;
+        transform: rotate(25deg);
+      }
+
+      .bg-card-7 {
+        background: linear-gradient(135deg, #f4c4f3, #fc67fa);
+        top: 45%;
+        left: 17%;
+        animation-delay: -18s;
+        transform: rotate(-12deg);
+      }
+
+      .bg-card-8 {
+        background: linear-gradient(135deg, #093028, #237A57);
+        top: 45%;
+        right: 14%;
+        animation-delay: -21s;
+        transform: rotate(15deg);
+      }
+
+      .bg-card:hover {
+        transform: translateY(-20px) rotate(var(--rotate));
+        box-shadow: 0 40px 80px #010101b3;
+      }
+
+      .bg-card-1 { --rotate: -15deg; }
+      .bg-card-2 { --rotate: 20deg; }
+      .bg-card-3 { --rotate: -10deg; }
+      .bg-card-4 { --rotate: 25deg; }
+      .bg-card-5 { --rotate: -20deg; }
+      .bg-card-6 { --rotate: 15deg; }
+      .bg-card-7 { --rotate: -25deg; }
+      .bg-card-8 { --rotate: -15deg; }
+
+      .card-brand {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 18px;
+        font-weight: 700;
+        color: white;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      }
+
+      .card-number {
+        position: absolute;
+        top: 60px;
+        left: 20px;
+        font-size: 20px;
+        letter-spacing: 2px;
+        color: white;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      }
+
+      .card-info {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+
+      .card-holder {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: white;
+      }
+
+      .card-expiry {
+        font-size: 13px;
+        color: white;
+      }
+
+      .wrapper {
+        background: #0a0a0a;
+        backdrop-filter: blur(10px);
+        width: 450px;
+        padding: 50px 40px;
+        border-radius: 24px;
+        border: 1px solid #1a1a1a;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+        position: relative;
+        z-index: 1;
+      }
+
+      .logo {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 25px;
+        background: linear-gradient(135deg ,#f12711, #f5af19);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 10px 30px rgba(91, 124, 230, 0.3);
+      }
+
+      h1 {
+        color: #ffffff;
+        font-size: 32px;
+        margin-bottom: 10px;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      .subtitle {
+        color: #888;
+        font-size: 14px;
+        margin-bottom: 40px;
+        text-align: center;
+      }
+
+      .input-box {
+        position: relative;
+        margin-bottom: 25px;
+      }
+
+      .input-box input {
+        width: 100%;
+        padding: 16px 20px;
+        background: #121212;
+        border: 1.5px solid #222;
+        border-radius: 12px;
+        font-size: 15px;
+        color: #ffffff;
+        transition: all 0.3s ease;
+        outline: none;
+      }
+
+      .input-box input:focus {
+        border-color: #5B7CE6;
+        background: #151515;
+        box-shadow: 0 0 0 4px rgba(91, 124, 230, 0.1);
+      }
+
+      .input-box input::placeholder {
+        color: #555;
+      }
+
+      .remember-forgot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        font-size: 14px;
+      }
+
+      .remember-forgot label {
+        display: flex;
+        align-items: center;
+        color: #999;
+        cursor: pointer;
+      }
+
+      .remember-forgot input[type="checkbox"] {
+        margin-right: 8px;
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+        accent-color: #5B7CE6;
+      }
+
+      .remember-forgot a {
+        color: #5B7CE6;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .remember-forgot a:hover {
+        color: #7B9EF5;
+        text-decoration: underline;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 16px;
+        background: rgb(21,21,21);
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(5, 5, 5, 0.4);
+        
+      }
+
+      .btn:hover {
+        color: black;
+        background-color: white;
+        box-shadow: 0 12px 35px rgba(40, 40, 40, 0.5);
+        transition: 0.4s;
+        
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .signup-link {
+        margin-top: 30px;
+        color: #666;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .signup-link a {
+        color: #5B7CE6;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .signup-link a:hover {
+        color: #7B9EF5;
+        text-decoration: underline;
+      }
+
+      .bg-card::before {
+        content: '';
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        top: 20px;
+        right: 20px;
+      }
+
+      .bg-card::after {
+        content: '))))';
+        position: absolute;
+        top: 25px;
+        right: 28px;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 20px;
+        font-weight: bold;
+        letter-spacing: -3px;
+      }
+    </style>
 </head>
 <body>
-    <h1>Sign-In page</h1>
+    <div class="bg-card bg-card-1">
+      <div class="card-brand">Swype</div>
+      <div class="card-number">1928 1032 1925 4252</div>
+      <div class="card-info">
+        <div>
+          
+          <div class="card-holder">Olivia Rhye</div>
+        </div>
+        <div>
+          
+          <div class="card-expiry">06/24</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-card bg-card-2">
+      <div class="card-brand">Swype</div>
+      <div class="card-number">0287 7237 9272 1023</div>
+      <div class="card-info">
+        <div>
+          
+          <div class="card-holder">Lana Steiner</div>
+        </div>
+        <div>
+          
+          <div class="card-expiry">06/24</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-card bg-card-3">
+      <div class="card-brand">Swype</div>
+      <div class="card-number">1225 9452 2192 1028</div>
+      <div class="card-info">
+        <div>
+         
+          <div class="card-holder">Phoenix Baker</div>
+        </div>
+        <div>
+         
+          <div class="card-expiry">06/24</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-card bg-card-4">
+      <div class="card-brand">Swype</div>
+      <div class="card-number">1121 1211 1231 1209</div>
+      <div class="card-info">
+        <div>
+        
+          <div class="card-holder">Candice Wu</div>
+        </div>
+        <div>
+          
+          <div class="card-expiry">04/25</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-card bg-card-5">
+      <div class="card-brand">Swype</div>
+      <div class="card-number">5678 9012 3456 7890</div>
+      <div class="card-info">
+        <div>
+          
+          <div class="card-holder">Alex Johnson</div>
+        </div>
+        <div>
+          
+          <div class="card-expiry">08/25</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-card bg-card-6">
+      <div class="card-brand">Swype</div>
+      <div class="card-number">4321 8765 2109 5432</div>
+      <div class="card-info">
+        <div>
+          
+          <div class="card-holder">Jordan Lee</div>
+        </div>
+        <div>
+          
+          <div class="card-expiry">12/24</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-card bg-card-7">
+      <div class="card-brand">Swype</div>
+      <div class="card-number">9876 5432 1098 7654</div>
+      <div class="card-info">
+        <div>
+          
+          <div class="card-holder">Taylor Smith</div>
+        </div>
+        <div>
+          
+          <div class="card-expiry">03/26</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-card bg-card-8">
+      <div class="card-brand">Swype</div>
+      <div class="card-number">1357 2468 9753 8642</div>
+      <div class="card-info">
+        <div>
+          
+          <div class="card-holder">Morgan Davis</div>
+        </div>
+        <div>
+         
+          <div class="card-expiry">11/25</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper">
+        
+        <h1>Welcome Back</h1>
+        <p class="subtitle">Sign in to access your financial dashboard</p>
+        
+        <div class="input-box">
+            <input type="text" placeholder="Username or Email" required>
+        </div>
+        
+        <div class="input-box">
+            <input type="password" placeholder="Password" required>
+        </p>
+        </div>
+
+        <div class="remember-forgot">
+            <label>
+                <input type="checkbox">
+                Remember Me
+            </label>
+            <a href="#">Forgot Password?</a>
+        </div>
+
+        <button class="btn" type="submit">Sign In</button>
+
+        <div class="signup-link">
+            <p>New to our platform? <a href="getearlyaccess.html">Get Early Access</a></p>
+        </div>
+    </div>
 </body>
 </html>
